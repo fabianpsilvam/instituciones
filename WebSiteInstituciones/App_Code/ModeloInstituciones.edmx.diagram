@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="03d30704366d442ba4ec54b3806e4baa" Name="Diagram1">
+        <EntityTypeShape EntityType="InstitucionModel.ACTIVIDAD" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.ALUMNO" Width="1.5" PointX="8.25" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.ALUMNO_NOTIFICACION" Width="1.5" PointX="10.5" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.ARCHIVO" Width="1.5" PointX="3.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.CALIFICACION" Width="1.5" PointX="12.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.CATALOGO" Width="1.5" PointX="5.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.CURSO" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.CURSO_MATEIRA" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.CURSO_PROFESOR" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.INSTITUCION" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.LIBRO" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.MATERIA" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.MATERIA_ALUMNO" Width="1.5" PointX="10.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.NOTICIA" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.NOTIFICACION" Width="1.5" PointX="8.25" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.PARALELO" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.PARCIAL" Width="1.5" PointX="3" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.PERIODO" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.PROFESOR" Width="1.5" PointX="6" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.TUTOR" Width="1.5" PointX="6" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.USUARIO" Width="1.5" PointX="3.75" PointY="20" IsExpanded="true" />
+        <AssociationConnector Association="InstitucionModel.FK_ACTIVIDA_REFERENCE_INSTITUC" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_ALUMNO_N_REFERENCE_ALUMNO" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_ALUMNO_REFERENCE_TUTOR" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_MATERIA__REFERENCE_ALUMNO" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_ALUMNO_N_REFERENCE_NOTIFICA" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_LIBRO_REFERENCE_ARCHIVO" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_NOTIFICA_REFERENCE_ARCHIVO" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_CALIFICA_REFERENCE_MATERIA_" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_CURSO_MA_REFERENCE_CURSO" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_CURSO_PR_REFERENCE_CURSO" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_CURSO_REFERENCE_INSTITUC" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_CURSO_REFERENCE_PARALELO" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_CURSO_MA_REFERENCE_MATERIA" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_CURSO_PR_REFERENCE_PROFESOR" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_LIBRO_REFERENCE_INSTITUC" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_NOTICIA_REFERENCE_INSTITUC" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_MATERIA__REFERENCE_MATERIA" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_MATERIA_REFERENCE_PERIODO" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_PARCIAL_REFERENCE_PERIODO" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_PROFESOR_REFERENCE_USUARIO" ManuallyRouted="false" />
+        <AssociationConnector Association="InstitucionModel.FK_TUTOR_REFERENCE_USUARIO" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
