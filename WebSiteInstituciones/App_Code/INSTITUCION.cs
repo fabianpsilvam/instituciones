@@ -30,6 +30,13 @@ public partial class INSTITUCION
         return institution.ToList();
     }
 
+    public List<INSTITUCION> obtainAllInstitutions()
+    {
+        IQueryable<INSTITUCION> institution = from i in Datos.INSTITUCIONs
+                                              select i;
+        return institution.ToList();
+    }
+
     public INSTITUCION obtainInstitutionById(int institutionId)
     {
         return Datos.INSTITUCIONs.SingleOrDefault<INSTITUCION>(i => i.INSTITUCIONID == institutionId);

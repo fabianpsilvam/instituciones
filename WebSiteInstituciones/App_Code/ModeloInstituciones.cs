@@ -9,7 +9,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public partial class ACTIVIDAD
 {
@@ -81,36 +80,6 @@ public partial class CALIFICACION
 
 public partial class CATALOGO
 {
-
-    private InstitucionEntities datos = null;
-
-    public InstitucionEntities Datos
-    {
-        get
-        {
-            if (datos == null)
-            {
-                datos = new InstitucionEntities();
-            }
-            return datos;
-        }
-    }
-
-
-    public CATALOGO addCatalogo(String nombre, String descripcion, String tipo)
-    {
-        CATALOGO catalog = new CATALOGO();
-        catalog.CATALOGOID = 0;
-        catalog.NOMBRE = nombre;
-        catalog.DESCRIPCION = descripcion;
-        catalog.TIPO = tipo;
-
-        Datos.CATALOGOes.Add(catalog);
-        Datos.SaveChanges();
-
-        return catalog;
-    }
-
     public int CATALOGOID { get; set; }
     public string NOMBRE { get; set; }
     public string DESCRIPCION { get; set; }
@@ -164,7 +133,6 @@ public partial class INSTITUCION
         this.CURSOes = new HashSet<CURSO>();
         this.LIBROes = new HashSet<LIBRO>();
         this.NOTICIAs = new HashSet<NOTICIA>();
-        //this.USUARIOs = new HashSet<USUARIO>();
     }
 
     public int INSTITUCIONID { get; set; }
@@ -174,7 +142,6 @@ public partial class INSTITUCION
     public virtual ICollection<CURSO> CURSOes { get; set; }
     public virtual ICollection<LIBRO> LIBROes { get; set; }
     public virtual ICollection<NOTICIA> NOTICIAs { get; set; }
-    //public virtual ICollection<USUARIO> USUARIOs { get; set; }
 }
 
 public partial class LIBRO
@@ -244,6 +211,7 @@ public partial class NOTIFICACION
     public Nullable<int> ARCHIVOID { get; set; }
     public string NOMBRE { get; set; }
     public string DESCRIPCION { get; set; }
+    public Nullable<int> INSTITUCIONID { get; set; }
 
     public virtual ICollection<ALUMNO_NOTIFICACION> ALUMNO_NOTIFICACION { get; set; }
     public virtual ARCHIVO ARCHIVO { get; set; }
@@ -335,12 +303,15 @@ public partial class USUARIO
     {
         this.PROFESORs = new HashSet<PROFESOR>();
         this.TUTORs = new HashSet<TUTOR>();
-    }  
+    }
 
     public int USUARIOID { get; set; }
     public string NOMBRE { get; set; }
     public string CLAVE { get; set; }
+
     public Nullable<int> INSTITUCIONID { get; set; }
+
+    public Nullable<int> PERFIL { get; set; }
 
     public virtual ICollection<PROFESOR> PROFESORs { get; set; }
     public virtual ICollection<TUTOR> TUTORs { get; set; }

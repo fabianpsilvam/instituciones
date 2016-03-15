@@ -27,7 +27,14 @@ public partial class NOTIFICACION
         return Datos.NOTIFICACIONs.SingleOrDefault<NOTIFICACION>(a => a.NOTIFICACIONID == notificacionId);
     }
 
-    public NOTIFICACION addNotificacion(String nombre, String descripcion, int archivoId)
+    public List<NOTIFICACION> obtainAllNotificaciones()
+    {
+        IQueryable<NOTIFICACION> notificacion = from i in Datos.NOTIFICACIONs
+                                              select i;
+        return notificacion.ToList();
+    }
+
+    public NOTIFICACION addNotificacion(String nombre, String descripcion, int archivoId, int institucionId)
     {
         NOTIFICACION notificacion = new NOTIFICACION();
 
@@ -37,6 +44,7 @@ public partial class NOTIFICACION
             notificacion.NOMBRE = nombre;
             notificacion.DESCRIPCION = descripcion;
             notificacion.ARCHIVOID= archivoId;
+            notificacion.INSTITUCIONID = institucionId;
 
             Datos.NOTIFICACIONs.Add(notificacion);
             Datos.SaveChanges();
@@ -61,7 +69,7 @@ public partial class NOTIFICACION
         return result;
     }
 
-    public NOTIFICACION refreshNotificacion(int notificacionId, String nombre, String descripcion, int archivoId)
+    public NOTIFICACION refreshNotificacion(int notificacionId, String nombre, String descripcion, int archivoId, int institucionId)
     {
         NOTIFICACION notificacion = null;
 
@@ -69,7 +77,7 @@ public partial class NOTIFICACION
         if (notificacionRefresh != null)
         {
             deleteNotificacion(notificacionId);
-            notificacion = addNotificacion(nombre, descripcion, archivoId);
+            notificacion = addNotificacion(nombre, descripcion, archivoId, institucionId);
         }
         return notificacion;
     }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="InstitucionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="InstitucionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="ACTIVIDAD">
           <Key>
             <PropertyRef Name="ACTIVIDADID" />
@@ -137,6 +137,7 @@
           <Property Name="ARCHIVOID" Type="int" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="100" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="500" />
+          <Property Name="INSTITUCIONID" Type="int" />
         </EntityType>
         <EntityType Name="PARALELO">
           <Key>
@@ -197,6 +198,7 @@
           <Property Name="NOMBRE" Type="varchar" MaxLength="10" />
           <Property Name="CLAVE" Type="varchar" MaxLength="100" />
           <Property Name="INSTITUCIONID" Type="int" />
+          <Property Name="PERFIL" Type="int" />
         </EntityType>
         <Association Name="FK_ACTIVIDA_REFERENCE_INSTITUC">
           <End Role="INSTITUCION" Type="Self.INSTITUCION" Multiplicity="0..1" />
@@ -557,8 +559,7 @@
             <End Role="TUTOR" EntitySet="TUTOR" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="InstitucionModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -724,6 +725,7 @@
           <Property Name="ARCHIVOID" Type="Int32" />
           <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="INSTITUCIONID" Type="Int32" />
           <NavigationProperty Name="ALUMNO_NOTIFICACION" Relationship="Self.FK_ALUMNO_N_REFERENCE_NOTIFICA" FromRole="NOTIFICACION" ToRole="ALUMNO_NOTIFICACION" />
           <NavigationProperty Name="ARCHIVO" Relationship="Self.FK_NOTIFICA_REFERENCE_ARCHIVO" FromRole="NOTIFICACION" ToRole="ARCHIVO" />
         </EntityType>
@@ -793,6 +795,8 @@
           <Property Name="USUARIOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CLAVE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="INSTITUCIONID" Type="Int32" />
+          <Property Name="PERFIL" Type="Int32" />
           <NavigationProperty Name="PROFESORs" Relationship="Self.FK_PROFESOR_REFERENCE_USUARIO" FromRole="USUARIO" ToRole="PROFESOR" />
           <NavigationProperty Name="TUTORs" Relationship="Self.FK_TUTOR_REFERENCE_USUARIO" FromRole="USUARIO" ToRole="TUTOR" />
         </EntityType>
@@ -1306,6 +1310,7 @@
                 <ScalarProperty Name="ARCHIVOID" ColumnName="ARCHIVOID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="INSTITUCIONID" ColumnName="INSTITUCIONID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1371,6 +1376,8 @@
                 <ScalarProperty Name="USUARIOID" ColumnName="USUARIOID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
+                <ScalarProperty Name="INSTITUCIONID" ColumnName="INSTITUCIONID" />
+                <ScalarProperty Name="PERFIL" ColumnName="PERFIL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -26,6 +26,12 @@ public partial class NOTICIA
     {
         return Datos.NOTICIAs.SingleOrDefault<NOTICIA>(a => a.NOTICIAID == noticiaId);
     }
+    public List<NOTICIA> obtainAllNoticias()
+    {
+        IQueryable<NOTICIA> noticia = from i in Datos.NOTICIAs
+                                                select i;
+        return noticia.ToList();
+    }
 
     public NOTICIA addNoticia(String nombre, String descripcion, int institucionId)
     {

@@ -27,23 +27,52 @@ public partial class PROFESOR
         return Datos.PROFESORs.SingleOrDefault<PROFESOR>(a => a.PROFESORID == profesorId);
     }
 
-    public PROFESOR addProfesor(String nombre, String apellido, String nombreLargo, DateTime fechaNacimiento, String cedula, String genero, int usuarioId)
+    public List<PROFESOR> obtainAllProfesoresByCedula(String cedula)
+    {
+        IQueryable<PROFESOR> profesor = from i in Datos.PROFESORs
+                                        where i.CEDULA.Equals(cedula)
+                                        select i;
+        return profesor.ToList();
+    }
+
+    public List<PROFESOR> obtainAllProfesoresByInstitucionId()
+    {
+        IQueryable<PROFESOR> profesor = from i in Datos.PROFESORs
+                                                select i;
+        return profesor.ToList();
+    }
+
+    public PROFESOR obtainProfesorByUserId(int userId)
+    {
+        return Datos.PROFESORs.SingleOrDefault<PROFESOR>(a => a.USUARIOID == userId);
+    }
+
+    public PROFESOR addProfesor(String nombre, String apellido, String nombreLargo, DateTime fechaNacimiento, String cedula, String genero, int usuarioId, Boolean validate)
     {
         PROFESOR profesor = new PROFESOR();
-
+        List<PROFESOR> profesores = new List<PROFESOR>();
         try
         {
-            profesor.PROFESORID = 0;
-            profesor.NOMBRE = nombre;
-            profesor.APELLIDO = apellido;
-            profesor.NOMBRELARGO = nombreLargo;
-            profesor.FECHANACIEMIENTO = fechaNacimiento;
-            profesor.CEDULA = cedula;
-            profesor.GENERO = genero;
-            profesor.USUARIOID = usuarioId;
+            if (validate)
+            {
+                profesores = profesor.obtainAllProfesoresByCedula(cedula);
+            }
 
-            Datos.PROFESORs.Add(profesor);
-            Datos.SaveChanges();
+            if (profesores.Count <= 0)
+            {
+
+                profesor.PROFESORID = 0;
+                profesor.NOMBRE = nombre;
+                profesor.APELLIDO = apellido;
+                profesor.NOMBRELARGO = nombreLargo;
+                profesor.FECHANACIEMIENTO = fechaNacimiento;
+                profesor.CEDULA = cedula;
+                profesor.GENERO = genero;
+                profesor.USUARIOID = usuarioId;
+
+                Datos.PROFESORs.Add(profesor);
+                Datos.SaveChanges();
+            }
         }
         catch (Exception ex)
         {
@@ -53,7 +82,7 @@ public partial class PROFESOR
         return profesor;
     }
 
-    public int deleteProfesor(int profesorId)
+    public int deleteProfesor(int profesorId, int userId)
     {
         int result = 0;
         PROFESOR profesorDelete = obtainProfesorById(profesorId);
@@ -62,6 +91,10 @@ public partial class PROFESOR
             Datos.PROFESORs.Remove(profesorDelete);
             result = Datos.SaveChanges();
         }
+
+        USUARIO user = new USUARIO();
+        user.deleteUser(userId);
+
         return result;
     }
 
@@ -72,8 +105,8 @@ public partial class PROFESOR
         PROFESOR profesorRefresh = obtainProfesorById(profesorId);
         if (profesorRefresh != null)
         {
-            deleteProfesor(profesorId);
-            profesor = addProfesor(nombre, apellido, nombreLargo, fechaNacimiento, cedula, genero, usuarioId);
+            deleteProfesor(profesorId, usuarioId);
+            profesor = addProfesor(nombre, apellido, nombreLargo, fechaNacimiento, cedula, genero, usuarioId, true);
         }
         return profesor;
     }

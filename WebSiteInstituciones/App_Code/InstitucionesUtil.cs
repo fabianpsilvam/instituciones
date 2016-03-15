@@ -53,4 +53,12 @@ public static class InstitucionesUtil
         }
         return textoLimpio;
     }
+
+
+    public static DateTime transformaFecha(String fechaTexto)
+    {
+        var myDate = DateTime.ParseExact(fechaTexto, "yy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None);
+        return myDate;
+
+    }
 }

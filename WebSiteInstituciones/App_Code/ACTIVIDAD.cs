@@ -30,6 +30,13 @@ public partial class ACTIVIDAD
         return actividad.ToList();
     }
 
+    public List<ACTIVIDAD> obtainAllActividades()
+    {
+        IQueryable<ACTIVIDAD> actividad = from i in Datos.ACTIVIDADs
+                                                select i;
+        return actividad.ToList();
+    }
+
     public ACTIVIDAD obtainActividadById(int actividadId)
     {
         return Datos.ACTIVIDADs.SingleOrDefault<ACTIVIDAD>(a => a.ACTIVIDADID == actividadId);

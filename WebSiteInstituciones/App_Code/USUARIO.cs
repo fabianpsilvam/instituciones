@@ -45,10 +45,15 @@ public partial class USUARIO
         return userLogin.ToList();
     }
 
-    public USUARIO addUser(String nombre, String clave, int institucionid)
+    public USUARIO addUser(String nombre, String clave, int institucionid, int perfil, Boolean validate)
     {
         USUARIO user = new USUARIO();
-        List<USUARIO> users = obtainUserByUserName(nombre);
+        List<USUARIO> users = new List<USUARIO>();
+        if (validate)
+        {
+            users = obtainUserByUserName(nombre);
+        }
+
         if (users.Count <= 0)
         {
             try
@@ -57,6 +62,7 @@ public partial class USUARIO
                 user.NOMBRE = nombre;
                 user.CLAVE = InstitucionesUtil.Encripta(clave);
                 user.INSTITUCIONID = institucionid;
+                user.PERFIL = perfil;
 
                 Datos.USUARIOs.Add(user);
                 Datos.SaveChanges();
@@ -81,7 +87,7 @@ public partial class USUARIO
         return result;
     }
 
-    public USUARIO refreshUser(int userId, String nombre, String clave, int institucionId)
+    public USUARIO refreshUser(int userId, String nombre, String clave, int institucionId, int perfil)
     {
         USUARIO user = null;
         //user.USUARIOID = userId;
@@ -92,7 +98,7 @@ public partial class USUARIO
         if (userRefresh != null)
         {
             deleteUser(userId);
-            user = addUser(nombre, InstitucionesUtil.Encripta(clave), institucionId);
+            user = addUser(nombre, InstitucionesUtil.Encripta(clave), institucionId, perfil, true);
         }
         return user;
     }

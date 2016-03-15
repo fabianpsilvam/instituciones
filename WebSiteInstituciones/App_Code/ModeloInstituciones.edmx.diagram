@@ -25,7 +25,7 @@
         <EntityTypeShape EntityType="InstitucionModel.PERIODO" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="InstitucionModel.PROFESOR" Width="1.5" PointX="6" PointY="19.5" IsExpanded="true" />
         <EntityTypeShape EntityType="InstitucionModel.TUTOR" Width="1.5" PointX="6" PointY="23.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="InstitucionModel.USUARIO" Width="1.5" PointX="3.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="InstitucionModel.USUARIO" Width="1.75" PointX="3.5" PointY="20" IsExpanded="true" />
         <AssociationConnector Association="InstitucionModel.FK_ACTIVIDA_REFERENCE_INSTITUC" ManuallyRouted="false" />
         <AssociationConnector Association="InstitucionModel.FK_ALUMNO_N_REFERENCE_ALUMNO" ManuallyRouted="false" />
         <AssociationConnector Association="InstitucionModel.FK_ALUMNO_REFERENCE_TUTOR" ManuallyRouted="false" />
