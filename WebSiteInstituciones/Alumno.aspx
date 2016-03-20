@@ -181,6 +181,13 @@
                                 </asp:GridView>
 
                             </div>
+                            <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Perriodo</label>
+                                        <asp:DropDownList ID="cbPeriodo" runat="server" class="form-control">
+                                        </asp:DropDownList>
+                                    </div>
+                                </div>
                         </div>
                     </div>
 

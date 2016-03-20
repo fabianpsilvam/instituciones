@@ -44,6 +44,22 @@ public partial class Alumno : System.Web.UI.Page
         }
         limpiar();
         cargarCursos();
+        cargarPeriodos();
+    }
+
+    private void cargarPeriodos()
+    {
+        PERIODO periodo = new PERIODO();
+        List<PERIODO> periodos = periodo.obtainAllPeriodos();
+        if (periodos != null && periodos.Count() > 0)
+        {
+            ListItem item = null;
+            foreach (PERIODO cu in periodos)
+            {
+                item = new ListItem(cu.NOMBRE, cu.PERIDODOID.ToString());
+                cbPeriodo.Items.Add(item);
+            }
+        }
     }
 
     private void cargarCursos()
@@ -71,6 +87,7 @@ public partial class Alumno : System.Web.UI.Page
         txtUsuarioTutor.Text = "";
         txtClaveTutor.Text = "";
         dgCursos.Enabled = true;
+        cbPeriodo.Enabled = true;
 
         lblAlumnoId.Text = "0";
         pnlError.Visible = false;
@@ -88,6 +105,7 @@ public partial class Alumno : System.Web.UI.Page
         btnCancelar.Visible = true;
 
         dgCursos.Enabled = false;
+        cbPeriodo.Enabled = false;
 
         pnlSucess.Visible = false;
         pnlError.Visible = false;
@@ -244,7 +262,7 @@ public partial class Alumno : System.Web.UI.Page
 
             if (!lblCursoId.Text.Equals(""))
             {
-                InstitucionesUtil.guardarCurso(Convert.ToInt32(lblCursoId.Text), alumno.ALUMNOID);
+                InstitucionesUtil.guardarCurso(Convert.ToInt32(lblCursoId.Text), alumno.ALUMNOID, Convert.ToInt32(cbPeriodo.SelectedItem.Value));
             }
 
             cargarAlumnos();

@@ -41,7 +41,7 @@ public partial class CALIFICACION
         return parcial1;
     }
 
-    public CALIFICACION addCalificacion(int parcial1, int parcial2, int parcial3, String observacion, int materiaAlumnoId)
+    public CALIFICACION addCalificacion(int parcial1, int parcial2, int parcial3, String observacion, int materiaAlumnoId, int periodoId)
     {
         CALIFICACION calificacion = new CALIFICACION();
 
@@ -54,6 +54,7 @@ public partial class CALIFICACION
             calificacion.PARCIAL2 = parcial2;
             calificacion.PARCIAL3 = parcial3;
             calificacion.MATERIAALUMNOID = materiaAlumnoId;
+            calificacion.PERIODOID = periodoId;
 
             Datos.CALIFICACIONs.Add(calificacion);
             Datos.SaveChanges();

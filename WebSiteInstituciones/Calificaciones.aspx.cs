@@ -153,7 +153,6 @@ public partial class Calificaciones : System.Web.UI.Page
         if (textoValidacion.Equals(""))
         {
             guardarCalifiaciones();
-            //cargarCalificaciones();
             lblSucess.Text = "Se creo Correctamente el Calificacion";
             pnlSucess.Visible = true;
         }

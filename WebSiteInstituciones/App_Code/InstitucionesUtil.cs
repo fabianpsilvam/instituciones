@@ -69,7 +69,7 @@ public static class InstitucionesUtil
     }
 
 
-    public static void guardarCurso(int cursoId, int alumnoId)
+    public static void guardarCurso(int cursoId, int alumnoId, int periodoId)
     {
         CURSO_MATEIRA cursoMateria = new CURSO_MATEIRA();
         List<CURSO_MATEIRA> cursoMaterias = cursoMateria.obtainAllCursoMateriasByCurso(cursoId);
@@ -82,7 +82,7 @@ public static class InstitucionesUtil
                 materiaAlumno = materiaAlumno.addMateriaAlumno(Convert.ToInt32(cursoMaterias[i].MATERIAID), alumnoId);
 
                 calificacion = new CALIFICACION();
-                calificacion.addCalificacion(0, 0, 0, "", materiaAlumno.MATERIAALUMNOID);
+                calificacion.addCalificacion(0, 0, 0, "", materiaAlumno.MATERIAALUMNOID, periodoId);
             }
         }
     }
@@ -101,7 +101,7 @@ public static class InstitucionesUtil
                 materiaAlumno = materiaAlumno.addMateriaAlumno(Convert.ToInt32(cursoMaterias[i].MATERIAID), alumnoId);
 
                 calificacion = new CALIFICACION();
-                calificacion.addCalificacion(0, 0, 0, "", materiaAlumno.MATERIAALUMNOID);
+                //calificacion.addCalificacion(0, 0, 0, "", materiaAlumno.MATERIAALUMNOID, );
             }
         }
     }

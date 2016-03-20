@@ -34,22 +34,17 @@
                                 <div class="form-group">
                                     <label>Nombre</label>
                                     <asp:TextBox ID="txtNombreMateria" runat="server" class="form-control"></asp:TextBox>
-<%--                                <input class="form-control" type="text">--%>
-                                    <p class="help-block">Nombre de la Materia.</p>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Puntos</label>
                                     <asp:TextBox ID="txtPuntos" runat="server" class="form-control"></asp:TextBox>
-                                    <p class="help-block">Puntos de la Materia</p>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Periodo</label>
-                                    <asp:DropDownList ID="cbPeriodo" runat="server" class="form-control">
+                                <%--<div class="form-group">
+                                    <asp:DropDownList ID="cbPeriodo" runat="server" class="form-control" Visible="false">
                                     </asp:DropDownList>
-                                    <p class="help-block">Periodo de la Materia</p>
-                                </div>
+                                </div>--%>
 
                                 <asp:Button ID="btnGuardarMateria" runat="server" Text="Guardar Materia" class="btn btn-info" OnClick="btnGuardarMateria_Click"/>
                                 <asp:Button ID="btnEditarMateria" runat="server" Text="Editar Materia" class="btn btn-primary" OnClick="btnEditarMateria_Click"/>  

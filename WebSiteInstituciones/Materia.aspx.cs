@@ -43,25 +43,25 @@ public partial class Materia : System.Web.UI.Page
             gridMaterias.DataBind();
         }
         limpiar();
-        cargarParalelos();
+        //cargarParalelos();
     }
 
 
-    private void cargarParalelos()
-    {
-        PARALELO paralelo = new PARALELO();
-        List<PARALELO> paralelos = paralelo.obtainAllParalelos();
-        if (paralelos != null && paralelos.Count() > 0)
-        {
-            ListItem item = null;
-            foreach (PARALELO pa in paralelos)
-            {
-                item = new ListItem(pa.NOMBRE, pa.PARALELOID.ToString());
-                cbPeriodo.Items.Add(item);
-            }
-        }
-        limpiar();
-    }
+    //private void cargarParalelos()
+    //{
+    //    PARALELO paralelo = new PARALELO();
+    //    List<PARALELO> paralelos = paralelo.obtainAllParalelos();
+    //    if (paralelos != null && paralelos.Count() > 0)
+    //    {
+    //        ListItem item = null;
+    //        foreach (PARALELO pa in paralelos)
+    //        {
+    //            item = new ListItem(pa.NOMBRE, pa.PARALELOID.ToString());
+    //            cbPeriodo.Items.Add(item);
+    //        }
+    //    }
+    //    limpiar();
+    //}
 
     private void limpiar()
     {
@@ -125,7 +125,7 @@ public partial class Materia : System.Web.UI.Page
         if (textoValidacion.Equals(""))
         {
             MATERIA materia = new MATERIA();
-            materia = materia.addMateria(txtNombreMateria.Text, txtPuntos.Text, Convert.ToInt32(cbPeriodo.SelectedValue));
+            materia = materia.addMateria(txtNombreMateria.Text, txtPuntos.Text, 1);
             cargarMaterias();
             lblSucess.Text = "Se creo Correctamente la Materia";
             pnlSucess.Visible = true;
@@ -142,7 +142,7 @@ public partial class Materia : System.Web.UI.Page
         if (textoValidacion.Equals(""))
         {
             MATERIA materia = new MATERIA();
-            materia.refreshMateria(Convert.ToInt32(lblMateriaId.Text), txtNombreMateria.Text, txtPuntos.Text, Convert.ToInt32(cbPeriodo.SelectedValue));
+            materia.refreshMateria(Convert.ToInt32(lblMateriaId.Text), txtNombreMateria.Text, txtPuntos.Text, 1);
             cargarMaterias();
 
             lblSucess.Text = "Se edito Correctamente el Materia";
