@@ -31,16 +31,13 @@
                                     <div class="form-group">
                                         <label>Nombre</label>
                                         <asp:TextBox ID="txtNombreNoticia" runat="server" class="form-control"></asp:TextBox>
-                                        <p class="help-block">Nombre de la Noticia.</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Institución: </label>
                                         <asp:Label ID="txtInstitucion" runat="server" Text=""  class="form-control"></asp:Label>
-                                        <p class="help-block">
-                                            <asp:Label ID="lblInstitucionId" runat="server" Text="0" Visible="true"></asp:Label>
-                                            Institución.</p>
+                                        <asp:Label ID="lblInstitucionId" runat="server" Text="0" Visible="false"></asp:Label>
                                     </div>
                                  </div>
 
@@ -48,7 +45,6 @@
                                     <div class="form-group">
                                         <label>Descripcion</label>
                                         <asp:TextBox ID="txtDescripcionNoticia" runat="server" class="form-control" Rows="2" TextMode="MultiLine"></asp:TextBox>
-                                        <p class="help-block">Descripción de la Noticia.</p>
                                     </div>
                                  </div>
 

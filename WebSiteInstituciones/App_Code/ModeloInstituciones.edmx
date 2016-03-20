@@ -42,6 +42,7 @@
           <Property Name="ARCHIVOID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="char" MaxLength="10" />
           <Property Name="DESCRPCION" Type="char" MaxLength="10" />
+          <Property Name="DATA" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="CALIFICACION">
           <Key>
@@ -49,7 +50,7 @@
           </Key>
           <Property Name="CALIFICACIONID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MATERIAALUMNOID" Type="int" />
-          <Property Name="PARCIALID" Type="int" />
+          <Property Name="PERIODOID" Type="int" />
           <Property Name="PARCIAL1" Type="int" />
           <Property Name="PARCIAL2" Type="int" />
           <Property Name="PARCIAL3" Type="int" />
@@ -610,6 +611,7 @@
           <Property Name="ARCHIVOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="DESCRPCION" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="DATA" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="LIBROes" Relationship="Self.FK_LIBRO_REFERENCE_ARCHIVO" FromRole="ARCHIVO" ToRole="LIBRO" />
           <NavigationProperty Name="NOTIFICACIONs" Relationship="Self.FK_NOTIFICA_REFERENCE_ARCHIVO" FromRole="ARCHIVO" ToRole="NOTIFICACION" />
         </EntityType>
@@ -619,7 +621,7 @@
           </Key>
           <Property Name="CALIFICACIONID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MATERIAALUMNOID" Type="Int32" />
-          <Property Name="PARCIALID" Type="Int32" />
+          <Property Name="PERIODOID" Type="Int32" />
           <Property Name="PARCIAL1" Type="Int32" />
           <Property Name="PARCIAL2" Type="Int32" />
           <Property Name="PARCIAL3" Type="Int32" />
@@ -1212,6 +1214,7 @@
                 <ScalarProperty Name="ARCHIVOID" ColumnName="ARCHIVOID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="DESCRPCION" ColumnName="DESCRPCION" />
+                <ScalarProperty Name="DATA" ColumnName="DATA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1220,7 +1223,7 @@
               <MappingFragment StoreEntitySet="CALIFICACION">
                 <ScalarProperty Name="CALIFICACIONID" ColumnName="CALIFICACIONID" />
                 <ScalarProperty Name="MATERIAALUMNOID" ColumnName="MATERIAALUMNOID" />
-                <ScalarProperty Name="PARCIALID" ColumnName="PARCIALID" />
+                <ScalarProperty Name="PERIODOID" ColumnName="PERIODOID" />
                 <ScalarProperty Name="PARCIAL1" ColumnName="PARCIAL1" />
                 <ScalarProperty Name="PARCIAL2" ColumnName="PARCIAL2" />
                 <ScalarProperty Name="PARCIAL3" ColumnName="PARCIAL3" />

@@ -30,8 +30,6 @@
                                 <div class="form-group">
                                     <label>Nombre</label>
                                     <asp:TextBox ID="txtNombreInstitucion" runat="server" class="form-control"></asp:TextBox>
-<%--                                <input class="form-control" type="text">--%>
-                                    <p class="help-block">Nombre de la Institución.</p>
                                 </div>
                                 <asp:Button ID="btnGuardarInstitucion" runat="server" Text="Guardar Institución" class="btn btn-info" OnClick="btnGuardarInstitucion_Click"/>  
 
@@ -40,7 +38,7 @@
                                 <asp:Button ID="btnEliminarInstitucion" runat="server" Text="Eliminar Institución" class="btn btn-danger" OnClick="btnEliminarInstitucion_Click"/>  
                                 <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" class="btn btn-warning" OnClick="btnCancelar_Click"/>  
                                 <%--<button type="submit" class="btn btn-info">Guardar Institución </button>--%>
-                                <asp:Label ID="lblInstitucionId" runat="server" Text="0" Visible="true"></asp:Label>
+                                <asp:Label ID="lblInstitucionId" runat="server" Text="0" Visible="false"></asp:Label>
                                 <asp:Label ID="lblInstitucionIdLogeado" runat="server" Text="0" Visible="False"></asp:Label>
                             </div>
                         </div>

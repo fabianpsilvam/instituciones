@@ -81,14 +81,22 @@ public partial class ACTIVIDAD
 
     public ACTIVIDAD refreshActividad(int actividadId, String actividadName, String actividadDescription, int institutionId)
     {
-        ACTIVIDAD actividad = null;
-
-        ACTIVIDAD actividadRefresh = obtainActividadById(actividadId);
-        if (actividadRefresh != null)
+        var query = (from c in Datos.ACTIVIDADs
+                     where c.ACTIVIDADID == actividadId
+                     select c).First();
+        try
         {
-            deleteActividad(actividadId);
-            actividad = addActividad(actividadName, actividadDescription, institutionId);
+            query.NOMBRE = actividadName;
+            query.DESCRIPCION = actividadDescription;
+            query.INSTITUCIONID = institutionId;
+
+            Datos.SaveChanges();
         }
-        return actividad;
+        catch (Exception ex)
+        {
+            query.ACTIVIDADID = 0;
+
+        }
+        return query;
     }
 }

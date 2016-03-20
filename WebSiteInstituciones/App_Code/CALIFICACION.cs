@@ -29,11 +29,11 @@ public partial class CALIFICACION
 
     private int calcularPromedio(int parcial1, int parcial2, int parcial3)
     {
-        if (parcial1 != null && parcial2 != null && parcial3 != null)
+        if (parcial1 != 0 && parcial2 != 0 && parcial3 != 0)
         {
             return (parcial1 + parcial2 + parcial3)/3;
         }
-        if (parcial1 != null && parcial2 != null)
+        if (parcial1 != 0 && parcial2 != 0)
         {
             return (parcial1 + parcial2) / 2;
         }

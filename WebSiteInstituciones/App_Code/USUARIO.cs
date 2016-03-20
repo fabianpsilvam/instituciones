@@ -89,17 +89,23 @@ public partial class USUARIO
 
     public USUARIO refreshUser(int userId, String nombre, String clave, int institucionId, int perfil)
     {
-        USUARIO user = null;
-        //user.USUARIOID = userId;
-        //user.NOMBRE = nombre;
-        //user.CLAVE = InstitucionesUtil.Encripta(clave);
-
-        USUARIO userRefresh = obtainUserById(userId);
-        if (userRefresh != null)
+        var query = (from c in Datos.USUARIOs
+                     where c.USUARIOID == userId
+                     select c).First();
+        try
         {
-            deleteUser(userId);
-            user = addUser(nombre, InstitucionesUtil.Encripta(clave), institucionId, perfil, true);
+            query.NOMBRE = nombre;
+            query.CLAVE = InstitucionesUtil.Encripta(clave);
+            query.INSTITUCIONID = institucionId;
+            query.PERFIL = perfil;
+
+            Datos.SaveChanges();
         }
-        return user;
+        catch (Exception ex)
+        {
+            query.USUARIOID = 0;
+
+        }
+        return query;
     }
 }

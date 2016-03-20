@@ -27,7 +27,7 @@ public partial class ARCHIVO
         return Datos.ARCHIVOes.SingleOrDefault<ARCHIVO>(a => a.ARCHIVOID == archivoId);
     }
 
-    public ARCHIVO addArchivo(String nombre, String descripcion)
+    public ARCHIVO addArchivo(String nombre, String descripcion, Byte[] bytes)
     {
         ARCHIVO archivo = new ARCHIVO();
 
@@ -36,6 +36,7 @@ public partial class ARCHIVO
             archivo.ARCHIVOID = 0;
             archivo.NOMBRE = nombre;
             archivo.DESCRPCION = descripcion;
+            archivo.DATA = bytes;
 
             Datos.ARCHIVOes.Add(archivo);
             Datos.SaveChanges();
@@ -60,16 +61,24 @@ public partial class ARCHIVO
         return result;
     }
 
-    public ARCHIVO refreshArchivo(int archivoId, String nombre, String descripcion)
+    public ARCHIVO refreshArchivo(int archivoId, String nombre, String descripcion, Byte[] bytes)
     {
-        ARCHIVO archivo = null;
-
-        ARCHIVO archivoRefresh = obtainArchivoById(archivoId);
-        if (archivoRefresh != null)
+        var query = (from c in Datos.ARCHIVOes
+                     where c.ARCHIVOID == archivoId
+                     select c).First();
+        try
         {
-            deleteArchivo(archivoId);
-            archivo = addArchivo(nombre, descripcion);
+            query.NOMBRE = nombre;
+            query.DESCRPCION = descripcion;
+            query.DATA = bytes;
+
+            Datos.SaveChanges();
         }
-        return archivo;
+        catch (Exception ex)
+        {
+            query.ARCHIVOID = 0;
+
+        }
+        return query;
     }
 }

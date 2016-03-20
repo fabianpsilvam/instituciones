@@ -12,7 +12,6 @@
            </div>
                 <!-- /. ROW  -->
            <div class="row">
-               <%--                                <input class="form-control" type="text">--%>
             <div class="col-md-12">
                 <asp:Panel ID="pnlSucess" runat="server" class="chat-widget-left">
                     <asp:Label ID="lblSucess" runat="server" Text=""></asp:Label>
@@ -31,14 +30,12 @@
                                     <div class="form-group">
                                         <label>Nombre</label>
                                         <asp:TextBox ID="txtNombreProfesor" runat="server" class="form-control"></asp:TextBox>
-                                        <p class="help-block">Nombre del Profesor</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Apellido</label>
                                         <asp:TextBox ID="txtApellidoProfesor" runat="server" class="form-control"></asp:TextBox>
-                                        <p class="help-block">Apellido del Profesor</p>
                                     </div>
                                 </div>
 
@@ -46,7 +43,6 @@
                                     <div class="form-group">
                                         <label>Cedula</label>
                                         <asp:TextBox ID="txtcedulaProfesor" runat="server" class="form-control" onkeypress='validate(event)'></asp:TextBox>
-                                        <p class="help-block">Cedula del Profesor</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -56,7 +52,6 @@
                                             <asp:ListItem Value="M">Masculino</asp:ListItem>
                                             <asp:ListItem Value="F">Femenino</asp:ListItem>
                                         </asp:DropDownList>
-                                        <p class="help-block">Genero del Profesor</p>
                                     </div>
                                 </div>
                                 <asp:Label ID="lblInstitucionId" runat="server" Text="0" Visible="false"></asp:Label>
@@ -65,14 +60,12 @@
                                     <div class="form-group">
                                         <label>Usuario</label>
                                         <asp:TextBox ID="txtUsuario" runat="server" class="form-control"></asp:TextBox>
-                                        <p class="help-block">Usuario del Profesor</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Clave</label>
                                         <asp:TextBox ID="txtClave" runat="server" class="form-control" TextMode="Password"></asp:TextBox>
-                                        <p class="help-block">Clave del Usuario</p>
                                     </div>
                                 </div>
 
@@ -81,7 +74,6 @@
                                         <div id='datetimepicker1'>
                                             <label>Fecha de Nacimiento</label>
                                             <asp:TextBox ID="txtFechaNacimiento" runat="server" class="form-control" type="date"></asp:TextBox>
-                                            <p class="help-block">Clave del Usuario</p>
                                         </div>
                                     </div>
                                  </div>
@@ -93,7 +85,6 @@
                                             <asp:ListItem Value="1">Normal</asp:ListItem>
                                             <asp:ListItem Value="2">Administrador</asp:ListItem>
                                         </asp:DropDownList>
-                                        <p class="help-block">Perfil de Usuario</p>
                                     </div>
                                 </div>
 
@@ -121,9 +112,9 @@
                                 <asp:GridView class="table table-striped table-bordered table-hover" ID="gridProfesores" runat="server" AutoGenerateColumns="False" AutoGenerateSelectButton="True" OnSelectedIndexChanged="gridProfesores_SelectedIndexChanged">
                                     <Columns>
                                         <asp:BoundField DataField="PROFESORID" HeaderText="Id" />
-                                        <asp:BoundField DataField="NOMBRE" HeaderText="Nombre" />
-                                        <asp:BoundField DataField="APELLIDO" HeaderText="apellido"/>
-                                        <asp:BoundField DataField="CEDULA" HeaderText="Descripcion"/>
+                                        <asp:BoundField DataField="NOMBRELARGO" HeaderText="Nombre" />
+                                        <asp:BoundField DataField="CEDULA" HeaderText="Cedula"/>
+                                        <asp:BoundField DataField="USUARIO.NOMBRE" HeaderText="Usuario"/>
                                     </Columns>
                                 </asp:GridView>
 

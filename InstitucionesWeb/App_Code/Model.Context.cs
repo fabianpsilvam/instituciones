@@ -11,10 +11,10 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
-public partial class InstitucionEntities2 : DbContext
+public partial class InstitucionEntities3 : DbContext
 {
-    public InstitucionEntities2()
-        : base("name=InstitucionEntities2")
+    public InstitucionEntities3()
+        : base("name=InstitucionEntities3")
     {
     }
 

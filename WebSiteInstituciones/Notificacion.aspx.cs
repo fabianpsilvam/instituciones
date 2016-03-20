@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -51,6 +52,9 @@ public partial class Administrar_Notificacion : System.Web.UI.Page
         txtNombreNotificacion.Text = "";
         txtDescripcionNotificacion.Text = "";
         lblNotificacionId.Text = "0";
+        lblArchivo.Text = "";
+        lblArchivoId.Text = "0";
+
         pnlError.Visible = false;
         pnlSucess.Visible = false;
         lblError.Text = "";
@@ -102,12 +106,28 @@ public partial class Administrar_Notificacion : System.Web.UI.Page
         String textoValidacion = validarNotificacion(false);
         if (textoValidacion.Equals(""))
         {
-            NOTIFICACION notificacion = new NOTIFICACION();
-            notificacion.addNotificacion(txtNombreNotificacion.Text, txtDescripcionNotificacion.Text, 2, Convert.ToInt32(lblInstitucionId.Text));
-            cargarNotificaciones();
+            Stream fs = upFileNotificacion.PostedFile.InputStream;
+            BinaryReader br = new BinaryReader(fs);
+            Byte[] bytes = br.ReadBytes((Int32)fs.Length);
 
-            lblSucess.Text = "Se creo Correctamente la Notificacion";
-            pnlSucess.Visible = true;
+            ARCHIVO archivo = new ARCHIVO();
+            archivo = archivo.addArchivo(Path.GetFileName(upFileNotificacion.PostedFile.FileName), 
+                                         Path.GetExtension(upFileNotificacion.PostedFile.FileName).Substring(1), bytes);
+
+            if (archivo.ARCHIVOID != 0)
+            {
+                NOTIFICACION notificacion = new NOTIFICACION();
+                notificacion.addNotificacion(txtNombreNotificacion.Text, txtDescripcionNotificacion.Text, archivo.ARCHIVOID,
+                                             Convert.ToInt32(lblInstitucionId.Text));
+                cargarNotificaciones();
+                lblSucess.Text = "Se creo Correctamente la Notificacion";
+                pnlSucess.Visible = true;
+            }
+            else
+            {
+                lblError.Text = "El archivo es demasiado pesado";
+                pnlError.Visible = true;
+            }
 
         }
         else
@@ -121,12 +141,32 @@ public partial class Administrar_Notificacion : System.Web.UI.Page
         String textoValidacion = validarNotificacion(true);
         if (textoValidacion.Equals(""))
         {
-            NOTIFICACION notificacion = new NOTIFICACION();
-            notificacion.refreshNotificacion(Convert.ToInt32(lblNotificacionId.Text), txtNombreNotificacion.Text, txtDescripcionNotificacion.Text, 2, Convert.ToInt32(lblInstitucionId.Text));
-            cargarNotificaciones();
 
-            lblSucess.Text = "Se edito Correctamente la Notificacion";
-            pnlSucess.Visible = true;
+            ARCHIVO archivo = new ARCHIVO();
+            archivo = archivo.obtainArchivoById(Convert.ToInt32(lblArchivoId.Text));
+            if (!archivo.NOMBRE.Equals(upFileNotificacion.PostedFile.FileName))
+            {
+                Stream fs = upFileNotificacion.PostedFile.InputStream;
+                BinaryReader br = new BinaryReader(fs);
+                Byte[] bytes = br.ReadBytes((Int32)fs.Length);
+
+                archivo = archivo.refreshArchivo(Convert.ToInt32(lblArchivoId.Text),Path.GetFileName(upFileNotificacion.PostedFile.FileName),
+                                         Path.GetExtension(upFileNotificacion.PostedFile.FileName).Substring(1), bytes);
+            }
+            if (archivo.ARCHIVOID != 0)
+            {
+                NOTIFICACION notificacion = new NOTIFICACION();
+                notificacion.refreshNotificacion(Convert.ToInt32(lblNotificacionId.Text), txtNombreNotificacion.Text, txtDescripcionNotificacion.Text, archivo.ARCHIVOID, Convert.ToInt32(lblInstitucionId.Text));
+                cargarNotificaciones();
+
+                lblSucess.Text = "Se edito Correctamente la Notificacion";
+                pnlSucess.Visible = true;
+            }
+            else
+            {
+                lblError.Text = "El archivo es demasiado pesado o el formato no es valido";
+                pnlError.Visible = true;
+            }
 
         }
         else
@@ -158,12 +198,22 @@ public partial class Administrar_Notificacion : System.Web.UI.Page
     {
         cargarNotificaciones();
     }
+
+    private void editarNotificacion(int notificacionId)
+    {
+        NOTIFICACION notificacion = new NOTIFICACION();
+        notificacion = notificacion.obtainNotificacionById(notificacionId);
+        lblArchivoId.Text = notificacion.ARCHIVOID.ToString();
+        lblArchivo.Text = "Archivo Anterior: " + notificacion.ARCHIVO.NOMBRE;
+        edit();
+    }
+
     protected void gridNotificaciones_SelectedIndexChanged(object sender, EventArgs e)
     {
         GridViewRow row = gridNotificaciones.SelectedRow;
         lblNotificacionId.Text = row.Cells[1].Text;
         txtNombreNotificacion.Text = row.Cells[2].Text;
         txtDescripcionNotificacion.Text = row.Cells[3].Text;
-        edit();
+        editarNotificacion(Convert.ToInt32(lblNotificacionId.Text));
     }
 }

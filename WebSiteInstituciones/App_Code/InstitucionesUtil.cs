@@ -69,20 +69,41 @@ public static class InstitucionesUtil
     }
 
 
-    public static CURSO guardarCurso(int cursoId, int alumnoId)
+    public static void guardarCurso(int cursoId, int alumnoId)
     {
         CURSO_MATEIRA cursoMateria = new CURSO_MATEIRA();
         List<CURSO_MATEIRA> cursoMaterias = cursoMateria.obtainAllCursoMateriasByCurso(cursoId);
         MATERIA_ALUMNO materiaAlumno = null;
+        CALIFICACION calificacion = null;
         if(cursoMaterias.Count > 0){
-            materiaAlumno = new MATERIA_ALUMNO();
             for (int i = 0; i < cursoMaterias.Count; i++)
             {
-                materiaAlumno.addMateriaAlumno(Convert.ToInt32(cursoMaterias[i].MATERIAID), alumnoId);
+                materiaAlumno = new MATERIA_ALUMNO();
+                materiaAlumno = materiaAlumno.addMateriaAlumno(Convert.ToInt32(cursoMaterias[i].MATERIAID), alumnoId);
+
+                calificacion = new CALIFICACION();
+                calificacion.addCalificacion(0, 0, 0, "", materiaAlumno.MATERIAALUMNOID);
             }
         }
+    }
 
-        return null;
+    public static void editarCurso(int cursoId, int alumnoId)
+    {
+        CURSO_MATEIRA cursoMateria = new CURSO_MATEIRA();
+        List<CURSO_MATEIRA> cursoMaterias = cursoMateria.obtainAllCursoMateriasByCurso(cursoId);
+        MATERIA_ALUMNO materiaAlumno = null;
+        CALIFICACION calificacion = null;
+        if (cursoMaterias.Count > 0)
+        {
+            for (int i = 0; i < cursoMaterias.Count; i++)
+            {
+                materiaAlumno = new MATERIA_ALUMNO();
+                materiaAlumno = materiaAlumno.addMateriaAlumno(Convert.ToInt32(cursoMaterias[i].MATERIAID), alumnoId);
+
+                calificacion = new CALIFICACION();
+                calificacion.addCalificacion(0, 0, 0, "", materiaAlumno.MATERIAALUMNOID);
+            }
+        }
     }
 
 }

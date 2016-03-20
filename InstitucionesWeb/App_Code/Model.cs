@@ -63,6 +63,7 @@ public partial class ARCHIVO
     public int ARCHIVOID { get; set; }
     public string NOMBRE { get; set; }
     public string DESCRPCION { get; set; }
+    public byte[] DATA { get; set; }
 
     public virtual ICollection<LIBRO> LIBRO { get; set; }
     public virtual ICollection<NOTIFICACION> NOTIFICACION { get; set; }
@@ -72,8 +73,12 @@ public partial class CALIFICACION
 {
     public int CALIFICACIONID { get; set; }
     public Nullable<int> MATERIAALUMNOID { get; set; }
-    public string VALOR { get; set; }
+    public Nullable<int> VALOR { get; set; }
     public string OBSERVACION { get; set; }
+    public Nullable<int> PARCIALID { get; set; }
+    public Nullable<int> PARCIAL2 { get; set; }
+    public Nullable<int> PARCIAL3 { get; set; }
+    public Nullable<int> PARCIAL1 { get; set; }
 
     public virtual MATERIA_ALUMNO MATERIA_ALUMNO { get; set; }
 }
@@ -211,6 +216,7 @@ public partial class NOTIFICACION
     public Nullable<int> ARCHIVOID { get; set; }
     public string NOMBRE { get; set; }
     public string DESCRIPCION { get; set; }
+    public Nullable<int> INSTITUCIONID { get; set; }
 
     public virtual ICollection<ALUMNO_NOTIFICACION> ALUMNO_NOTIFICACION { get; set; }
     public virtual ARCHIVO ARCHIVO { get; set; }
@@ -308,6 +314,7 @@ public partial class USUARIO
     public string NOMBRE { get; set; }
     public string CLAVE { get; set; }
     public Nullable<int> INSTITUCIONID { get; set; }
+    public Nullable<int> PERFIL { get; set; }
 
     public virtual ICollection<PROFESOR> PROFESOR { get; set; }
     public virtual ICollection<TUTOR> TUTOR { get; set; }

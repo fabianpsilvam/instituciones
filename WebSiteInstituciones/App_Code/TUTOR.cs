@@ -74,16 +74,23 @@ public partial class TUTOR
         return result;
     }
 
-    public TUTOR refreshTutor(int tutorId, String nombre, String apellido, String nombreLargo, DateTime fechaNacimiento, String cedula, String genero, int usuarioId)
+    public TUTOR refreshTutor(int tutorId, String nombre, String apellido, String nombreLargo, DateTime fechaNacimiento, 
+        String cedula, String genero, int usuarioId)
     {
-        TUTOR tutor = null;
+        var query = (from c in Datos.TUTORs
+                     where c.TUTORID == tutorId
+                     select c).First();
 
-        TUTOR tutorRefresh = obtainTutorById(tutorId);
-        if (tutorRefresh != null)
-        {
-            deletTutor(tutorId);
-            tutor = addTutor(nombre, apellido, nombreLargo, fechaNacimiento, cedula, genero, usuarioId);
-        }
-        return tutor;
+        query.NOMBRE = nombre;
+        query.APELLIDO = apellido;
+        query.NOMBRELARGO = nombreLargo;
+        query.FECHANACIMIENTO = fechaNacimiento;
+        query.CEDULA = cedula;
+        query.GENERO = genero;
+        query.USUARIOID = usuarioId;
+
+        Datos.SaveChanges();
+
+        return query;
     }
 }

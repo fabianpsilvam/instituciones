@@ -42,6 +42,7 @@
           <Property Name="ARCHIVOID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="char" MaxLength="10" />
           <Property Name="DESCRPCION" Type="char" MaxLength="10" />
+          <Property Name="DATA" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="CALIFICACION">
           <Key>
@@ -49,8 +50,12 @@
           </Key>
           <Property Name="CALIFICACIONID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MATERIAALUMNOID" Type="int" />
-          <Property Name="VALOR" Type="varchar" MaxLength="10" />
+          <Property Name="VALOR" Type="int" />
           <Property Name="OBSERVACION" Type="varchar" MaxLength="100" />
+          <Property Name="PARCIALID" Type="int" />
+          <Property Name="PARCIAL2" Type="int" />
+          <Property Name="PARCIAL3" Type="int" />
+          <Property Name="PARCIAL1" Type="int" />
         </EntityType>
         <EntityType Name="CATALOGO">
           <Key>
@@ -137,6 +142,7 @@
           <Property Name="ARCHIVOID" Type="int" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="100" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="500" />
+          <Property Name="INSTITUCIONID" Type="int" />
         </EntityType>
         <EntityType Name="PARALELO">
           <Key>
@@ -197,6 +203,7 @@
           <Property Name="NOMBRE" Type="varchar" MaxLength="10" />
           <Property Name="CLAVE" Type="varchar" MaxLength="100" />
           <Property Name="INSTITUCIONID" Type="int" />
+          <Property Name="PERFIL" Type="int" />
         </EntityType>
         <Association Name="FK_ACTIVIDA_REFERENCE_INSTITUC">
           <End Role="INSTITUCION" Type="Self.INSTITUCION" Multiplicity="0..1" />
@@ -605,6 +612,7 @@
           <Property Name="ARCHIVOID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="DESCRPCION" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="DATA" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="LIBRO" Relationship="Self.FK_LIBRO_REFERENCE_ARCHIVO" FromRole="ARCHIVO" ToRole="LIBRO" />
           <NavigationProperty Name="NOTIFICACION" Relationship="Self.FK_NOTIFICA_REFERENCE_ARCHIVO" FromRole="ARCHIVO" ToRole="NOTIFICACION" />
         </EntityType>
@@ -614,8 +622,12 @@
           </Key>
           <Property Name="CALIFICACIONID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MATERIAALUMNOID" Type="Int32" />
-          <Property Name="VALOR" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="VALOR" Type="Int32" />
           <Property Name="OBSERVACION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PARCIALID" Type="Int32" />
+          <Property Name="PARCIAL2" Type="Int32" />
+          <Property Name="PARCIAL3" Type="Int32" />
+          <Property Name="PARCIAL1" Type="Int32" />
           <NavigationProperty Name="MATERIA_ALUMNO" Relationship="Self.FK_CALIFICA_REFERENCE_MATERIA_" FromRole="CALIFICACION" ToRole="MATERIA_ALUMNO" />
         </EntityType>
         <EntityType Name="CATALOGO">
@@ -724,6 +736,7 @@
           <Property Name="ARCHIVOID" Type="Int32" />
           <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="INSTITUCIONID" Type="Int32" />
           <NavigationProperty Name="ALUMNO_NOTIFICACION" Relationship="Self.FK_ALUMNO_N_REFERENCE_NOTIFICA" FromRole="NOTIFICACION" ToRole="ALUMNO_NOTIFICACION" />
           <NavigationProperty Name="ARCHIVO" Relationship="Self.FK_NOTIFICA_REFERENCE_ARCHIVO" FromRole="NOTIFICACION" ToRole="ARCHIVO" />
         </EntityType>
@@ -794,6 +807,7 @@
           <Property Name="NOMBRE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CLAVE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="INSTITUCIONID" Type="Int32" />
+          <Property Name="PERFIL" Type="Int32" />
           <NavigationProperty Name="PROFESOR" Relationship="Self.FK_PROFESOR_REFERENCE_USUARIO" FromRole="USUARIO" ToRole="PROFESOR" />
           <NavigationProperty Name="TUTOR" Relationship="Self.FK_TUTOR_REFERENCE_USUARIO" FromRole="USUARIO" ToRole="TUTOR" />
         </EntityType>
@@ -1049,7 +1063,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="InstitucionEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="InstitucionEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ACTIVIDAD" EntityType="Self.ACTIVIDAD" />
           <EntitySet Name="ALUMNO" EntityType="Self.ALUMNO" />
           <EntitySet Name="ALUMNO_NOTIFICACION" EntityType="Self.ALUMNO_NOTIFICACION" />
@@ -1161,7 +1175,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="InstitucionModelStoreContainer" CdmEntityContainer="InstitucionEntities2">
+        <EntityContainerMapping StorageEntityContainer="InstitucionModelStoreContainer" CdmEntityContainer="InstitucionEntities3">
           <EntitySetMapping Name="ACTIVIDAD">
             <EntityTypeMapping TypeName="InstitucionModel.ACTIVIDAD">
               <MappingFragment StoreEntitySet="ACTIVIDAD">
@@ -1201,6 +1215,7 @@
                 <ScalarProperty Name="ARCHIVOID" ColumnName="ARCHIVOID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="DESCRPCION" ColumnName="DESCRPCION" />
+                <ScalarProperty Name="DATA" ColumnName="DATA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1211,6 +1226,10 @@
                 <ScalarProperty Name="MATERIAALUMNOID" ColumnName="MATERIAALUMNOID" />
                 <ScalarProperty Name="VALOR" ColumnName="VALOR" />
                 <ScalarProperty Name="OBSERVACION" ColumnName="OBSERVACION" />
+                <ScalarProperty Name="PARCIALID" ColumnName="PARCIALID" />
+                <ScalarProperty Name="PARCIAL2" ColumnName="PARCIAL2" />
+                <ScalarProperty Name="PARCIAL3" ColumnName="PARCIAL3" />
+                <ScalarProperty Name="PARCIAL1" ColumnName="PARCIAL1" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1307,6 +1326,7 @@
                 <ScalarProperty Name="ARCHIVOID" ColumnName="ARCHIVOID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="INSTITUCIONID" ColumnName="INSTITUCIONID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1373,6 +1393,7 @@
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
                 <ScalarProperty Name="INSTITUCIONID" ColumnName="INSTITUCIONID" />
+                <ScalarProperty Name="PERFIL" ColumnName="PERFIL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -69,14 +69,22 @@ public partial class NOTICIA
 
     public NOTICIA refreshNoticia(int noticiaId, String nombre, String descripcion, int institucionId)
     {
-        NOTICIA noticia = null;
-
-        NOTICIA noticiaRefresh = obtainNoticiaById(noticiaId);
-        if (noticiaRefresh != null)
+        var query = (from c in Datos.NOTICIAs
+                     where c.NOTICIAID == noticiaId
+                     select c).First();
+        try
         {
-            deleteNoticia(noticiaId);
-            noticia = addNoticia(nombre, descripcion, institucionId);
+            query.NOMBRE = nombre;
+            query.DESCRIPCION = descripcion;
+            query.INSTITUCIONID = institucionId;
+
+            Datos.SaveChanges();
         }
-        return noticia;
+        catch (Exception ex)
+        {
+            query.NOTICIAID = 0;
+
+        }
+        return query;
     }
 }

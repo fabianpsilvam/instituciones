@@ -31,17 +31,14 @@
                                     <div class="form-group">
                                         <label>Nombre</label>
                                         <asp:TextBox ID="txtNombreNotificacion" runat="server" class="form-control"></asp:TextBox>
-                                        <p class="help-block">Nombre de la Notificación.</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Institución: </label>
                                         <asp:Label ID="txtInstitucion" runat="server" Text=""  class="form-control"></asp:Label>
-                                        <%--<asp:TextBox ID="txtInstitucione" runat="server" class="form-control"  disabled=""></asp:TextBox>--%>
-                                        <p class="help-block">
-                                            <asp:Label ID="lblInstitucionId" runat="server" Text="0" Visible="true"></asp:Label>
-                                            Institución.</p>
+                                            <asp:Label ID="lblInstitucionId" runat="server" Text="0" Visible="false"></asp:Label>
+                                            <asp:Label ID="lblArchivoId" runat="server" Text="0" Visible="false"></asp:Label>
                                     </div>
                                  </div>
 
@@ -49,7 +46,6 @@
                                     <div class="form-group">
                                         <label>Descripcion</label>
                                         <asp:TextBox ID="txtDescripcionNotificacion" runat="server" class="form-control" Rows="2" TextMode="MultiLine"></asp:TextBox>
-                                        <p class="help-block">Descripción de la Notificación.</p>
                                     </div>
                                  </div>
 
@@ -57,7 +53,7 @@
                                     <div class="form-group">
                                         <label>Archivo</label>
                                         <asp:FileUpload ID="upFileNotificacion" runat="server"/>
-                                        <p class="help-block">Archivo de la Notificación.</p>
+                                        <asp:Label ID="lblArchivo" runat="server"></asp:Label>
                                     </div>
                                  </div>
 
@@ -86,6 +82,7 @@
                                         <asp:BoundField DataField="NOTIFICACIONID" HeaderText="Id" />
                                         <asp:BoundField DataField="NOMBRE" HeaderText="Nombre" />
                                         <asp:BoundField DataField="DESCRIPCION" HeaderText="Descripcion"/>
+                                        <asp:BoundField DataField="ARCHIVO.NOMBRE" HeaderText="Archivo"/>
                                     </Columns>
                                 </asp:GridView>
 

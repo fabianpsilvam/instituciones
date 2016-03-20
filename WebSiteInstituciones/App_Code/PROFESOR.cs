@@ -98,16 +98,29 @@ public partial class PROFESOR
         return result;
     }
 
-    public PROFESOR refreshProfesor(int profesorId, String nombre, String apellido, String nombreLargo, DateTime fechaNacimiento, String cedula, String genero, int usuarioId)
+    public PROFESOR refreshProfesor(int profesorId, String nombre, String apellido, String nombreLargo, DateTime fechaNacimiento, 
+        String cedula, String genero, int usuarioId)
     {
-        PROFESOR profesor = null;
-
-        PROFESOR profesorRefresh = obtainProfesorById(profesorId);
-        if (profesorRefresh != null)
+        var query = (from c in Datos.PROFESORs
+                     where c.PROFESORID == profesorId
+                     select c).First();
+        try
         {
-            deleteProfesor(profesorId, usuarioId);
-            profesor = addProfesor(nombre, apellido, nombreLargo, fechaNacimiento, cedula, genero, usuarioId, true);
+            query.NOMBRE = nombre;
+            query.APELLIDO = apellido;
+            query.NOMBRELARGO = nombreLargo;
+            query.FECHANACIEMIENTO = fechaNacimiento;
+            query.CEDULA = cedula;
+            query.GENERO = genero;
+            query.USUARIOID = usuarioId;
+
+            Datos.SaveChanges();
         }
-        return profesor;
+        catch (Exception ex)
+        {
+            query.PROFESORID = 0;
+
+        }
+        return query;
     }
 }

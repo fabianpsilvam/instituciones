@@ -37,7 +37,7 @@ public partial class ALUMNO
                     from ama in idAlumnos
                     join cal in Datos.CALIFICACIONs on ama.MATERIAALUMNOID equals cal.MATERIAALUMNOID into idCalificacion
                     from amacal in idCalificacion
-                    join par in Datos.PARCIALs on amacal.PARCIALID equals par.PARCIALID
+                    join par in Datos.PARCIALs on amacal.PERIODOID equals par.PARCIALID
                     join m in Datos.MATERIAs on ama.MATERIAID equals m.MATERIAID into idMaterias
                     from amam in idMaterias
                     join cm in Datos.CURSO_MATEIRA on amam.MATERIAID equals cm.MATERIAID into idMateriaCurso
@@ -123,16 +123,29 @@ public partial class ALUMNO
         return result;
     }
 
-    public ALUMNO refreshAlumno(int alumnoId, String alumnoNombre, String alumnoApellido, String alumnoNombreLargo, DateTime fechaNacimiento, String genero, String cedula, int tutorId)
+    public ALUMNO refreshAlumno(int alumnoId, String alumnoNombre, String alumnoApellido, String alumnoNombreLargo, 
+        DateTime fechaNacimiento, String genero, String cedula, int tutorId)
     {
-        ALUMNO alumno = null;
-
-        ALUMNO alumnoRefresh = obtainAlumnoById(alumnoId);
-        if (alumnoRefresh != null)
+        var query = (from c in Datos.ALUMNOes
+                     where c.ALUMNOID == alumnoId
+                     select c).First();
+        try
         {
-            deleteAlumno(alumnoId);
-            alumno = addAlumno(alumnoNombre, alumnoApellido, alumnoNombreLargo, fechaNacimiento,genero, cedula, tutorId);
+            query.NOMBRE = alumnoNombre;
+            query.APELLIDO = alumnoApellido;
+            query.NOMBRELARGO = alumnoNombreLargo;
+            query.FECHANACIMIENTO = fechaNacimiento;
+            query.CEDULA = cedula;
+            query.GENERO = genero;
+            query.TUTORID = tutorId;
+
+            Datos.SaveChanges();
         }
-        return alumno;
+        catch (Exception ex)
+        {
+            query.ALUMNOID = 0;
+
+        }
+        return query;
     }
 }

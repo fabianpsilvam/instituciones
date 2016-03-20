@@ -70,6 +70,7 @@ public partial class Alumno : System.Web.UI.Page
         txtFechaNacimientoTutor.Text = "";
         txtUsuarioTutor.Text = "";
         txtClaveTutor.Text = "";
+        dgCursos.Enabled = true;
 
         lblAlumnoId.Text = "0";
         pnlError.Visible = false;
@@ -83,8 +84,11 @@ public partial class Alumno : System.Web.UI.Page
     {
         btnEditarAlumno.Visible = true;
         btnGuardarAlumno.Visible = false;
-        btnEliminarAlumno.Visible = true;
+        //btnEliminarAlumno.Visible = true;
         btnCancelar.Visible = true;
+
+        dgCursos.Enabled = false;
+
         pnlSucess.Visible = false;
         pnlError.Visible = false;
     }
@@ -258,8 +262,18 @@ public partial class Alumno : System.Web.UI.Page
         String textoValidacion = validarAlumno(true);
         if (textoValidacion.Equals(""))
         {
+            DateTime fechaNacimientoAlumno = Convert.ToDateTime(txtFechaNacimientoAlumno.Text);
+            DateTime fechaNacimientoTutor = Convert.ToDateTime(txtFechaNacimientoTutor.Text);
+
+            USUARIO usuario = new USUARIO();
+            usuario = usuario.refreshUser(Convert.ToInt32(lblUsuarioId.Text), txtUsuarioTutor.Text, txtClaveTutor.Text, Convert.ToInt32(lblInstitucionId.Text), Convert.ToInt32(cbPerfil.SelectedItem.Value));
+
+            TUTOR tutor = new TUTOR();
+            tutor = tutor.refreshTutor(Convert.ToInt32(lblTutorId.Text), txtNombreTutor.Text, txtApellidoTutor.Text, txtNombreTutor.Text + " " + txtApellidoTutor.Text, fechaNacimientoTutor, txtCedulaTutor.Text, cbGeneroTutor.SelectedValue.ToString(), usuario.USUARIOID);
+
             ALUMNO alumno = new ALUMNO();
-            alumno.refreshAlumno(Convert.ToInt32(lblAlumnoId.Text), txtNombreAlumno.Text, txtApellidoAlumno.Text, txtNombreAlumno.Text + " " + txtApellidoAlumno.Text, new DateTime(), txtCedulaAlumno.Text, cbGeneroAlumno.SelectedValue.ToString(), Convert.ToInt32(lblTutorId.Text));
+            alumno.refreshAlumno(Convert.ToInt32(lblAlumnoId.Text), txtNombreAlumno.Text, txtApellidoAlumno.Text, txtNombreAlumno.Text + " " + txtApellidoAlumno.Text, fechaNacimientoAlumno, cbGeneroAlumno.SelectedValue.ToString(), txtCedulaAlumno.Text, tutor.TUTORID);
+
             cargarAlumnos();
 
             lblSucess.Text = "Se edito Correctamente el Alumno";
@@ -330,12 +344,9 @@ public partial class Alumno : System.Web.UI.Page
                 setCursoId(cursoMateria[0].CURSOID.ToString());
             }
         }
-        
-
         lblUsuarioId.Text = alumno.TUTOR.USUARIO.USUARIOID.ToString();
         lblTutorId.Text = alumno.TUTOR.TUTORID.ToString();
         edit();
-
     }
 
     protected void gridAlumnos_SelectedIndexChanged(object sender, EventArgs e)

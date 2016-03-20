@@ -171,12 +171,27 @@ public partial class Administrar_Profesor : System.Web.UI.Page
         String textoValidacion = validarProfesor(true);
         if (textoValidacion.Equals(""))
         {
-            PROFESOR profesor = new PROFESOR();
-            profesor.refreshProfesor(Convert.ToInt32(lblProfesorId.Text), txtNombreProfesor.Text, txtApellidoProfesor.Text, txtNombreProfesor.Text + " " + txtApellidoProfesor.Text, new DateTime(), txtcedulaProfesor.Text, dlGenero.SelectedValue.ToString(), 1);
-            cargarProfesores();
 
-            lblSucess.Text = "Se edito Correctamente el Profesor";
-            pnlSucess.Visible = true;
+            USUARIO usuario = new USUARIO();
+            usuario = usuario.refreshUser(Convert.ToInt32(lblUsuarioId.Text), txtUsuario.Text, txtClave.Text,
+                Convert.ToInt32(lblInstitucionId.Text), Convert.ToInt32(cbPerfil.SelectedItem.Value));
+
+            if (usuario.USUARIOID != 0)
+            {
+                DateTime fechaNacimiento = Convert.ToDateTime(txtFechaNacimiento.Text);
+
+                PROFESOR profesor = new PROFESOR();
+                profesor.refreshProfesor(Convert.ToInt32(lblProfesorId.Text), txtNombreProfesor.Text, txtApellidoProfesor.Text, txtNombreProfesor.Text + " " + txtApellidoProfesor.Text, fechaNacimiento, txtcedulaProfesor.Text, dlGenero.SelectedValue.ToString(), usuario.USUARIOID);
+                cargarProfesores();
+
+                lblSucess.Text = "Se edito Correctamente el Profesor";
+                pnlSucess.Visible = true;
+            }
+            else
+            {
+                lblError.Text = "Error al editar el Usuario";
+                pnlError.Visible = true;
+            }
 
         }
         else
@@ -192,6 +207,10 @@ public partial class Administrar_Profesor : System.Web.UI.Page
         {
             PROFESOR profesor = new PROFESOR();
             profesor.deleteProfesor(Convert.ToInt32(lblProfesorId.Text), Convert.ToInt32(lblUsuarioId.Text));
+
+            USUARIO usuario = new USUARIO();
+            usuario.deleteUser(Convert.ToInt32(lblUsuarioId.Text));
+
             cargarProfesores();
 
             lblSucess.Text = "Se elimino Correctamente el Profesor";

@@ -52,7 +52,10 @@ public partial class Institution : System.Web.UI.Page
     {
         btnEditarInstitucion.Visible = true;
         btnGuardarInstitucion.Visible = false;
-        btnEliminarInstitucion.Visible = true;
+        if (!lblInstitucionId.Text.Equals(lblInstitucionIdLogeado.Text))
+        {
+            btnEliminarInstitucion.Visible = true;
+        }
         btnCancelar.Visible = true;
         pnlSucess.Visible = false;
         pnlError.Visible = false;
@@ -68,11 +71,11 @@ public partial class Institution : System.Web.UI.Page
 
     private String validarInstitucion(Boolean isEdit)
     {
-        if (txtNombreInstitucion.Text.Equals("") && !isEdit)
+        if (txtNombreInstitucion.Text.Equals(""))
         {
             return "Complete el Nombre de la Institucion";
         }
-        if (lblInstitucionId.Text.Equals("0") || lblInstitucionId.Text.Equals("") || lblInstitucionId.Text.Equals(lblInstitucionIdLogeado.Text))
+        if ((lblInstitucionId.Text.Equals("0") || lblInstitucionId.Text.Equals("") || lblInstitucionId.Text.Equals(lblInstitucionIdLogeado.Text)) && isEdit)
         {
             return "Ocurrio un error en el id de la Institucion";
         }

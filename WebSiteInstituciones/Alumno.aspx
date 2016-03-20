@@ -38,14 +38,12 @@
                                     <div class="form-group">
                                         <label>Nombre</label>
                                         <asp:TextBox ID="txtNombreAlumno" runat="server" class="form-control"></asp:TextBox>
-                                        <p class="help-block">Nombre del Alumno</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Apellido</label>
                                         <asp:TextBox ID="txtApellidoAlumno" runat="server" class="form-control"></asp:TextBox>
-                                        <p class="help-block">Apellido del Alumno</p>
                                     </div>
                                 </div>
 
@@ -53,7 +51,6 @@
                                     <div class="form-group">
                                         <label>Cedula</label>
                                         <asp:TextBox ID="txtCedulaAlumno" runat="server" class="form-control" onkeypress='validate(event)'></asp:TextBox>
-                                        <p class="help-block">Cedula del Alumno</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -62,8 +59,7 @@
                                         <asp:DropDownList ID="cbGeneroAlumno" runat="server" class="form-control">
                                             <asp:ListItem Value="M">Masculino</asp:ListItem>
                                             <asp:ListItem Value="F">Femenino</asp:ListItem>
-                                        </asp:DropDownList>                                        
-                                        <p class="help-block">Genero del Alumno</p>
+                                        </asp:DropDownList>
                                     </div>
                                 </div>
                                 <asp:Label ID="lblInstitucionId" runat="server" Text="0" Visible="false"></asp:Label>
@@ -73,7 +69,6 @@
                                         <div id='datetimepicker2'>
                                             <label>Fecha de Nacimiento</label>
                                             <asp:TextBox ID="txtFechaNacimientoAlumno" runat="server" class="form-control" type="date"></asp:TextBox>
-                                        <p class="help-block">Fecha de Nacimiento</p>
                                         </div>
                                     </div>
                                  </div>

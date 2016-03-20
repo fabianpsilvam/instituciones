@@ -63,22 +63,28 @@ public partial class NOTIFICACION
         NOTIFICACION notificacionDelete = obtainNotificacionById(notificacionId);
         if (notificacionDelete != null)
         {
+            int archivoId = Convert.ToInt32(notificacionDelete.ARCHIVOID);
             Datos.NOTIFICACIONs.Remove(notificacionDelete);
             result = Datos.SaveChanges();
+
+            ARCHIVO archivo = new ARCHIVO();
+            archivo.deleteArchivo(archivoId);
         }
         return result;
     }
 
     public NOTIFICACION refreshNotificacion(int notificacionId, String nombre, String descripcion, int archivoId, int institucionId)
     {
-        NOTIFICACION notificacion = null;
+        var query = (from c in Datos.NOTIFICACIONs
+                     where c.NOTIFICACIONID == notificacionId
+                     select c).First();
 
-        NOTIFICACION notificacionRefresh = obtainNotificacionById(notificacionId);
-        if (notificacionRefresh != null)
-        {
-            deleteNotificacion(notificacionId);
-            notificacion = addNotificacion(nombre, descripcion, archivoId, institucionId);
-        }
-        return notificacion;
+        query.NOMBRE = nombre;
+        query.DESCRIPCION = descripcion;
+        query.INSTITUCIONID = institucionId;
+
+        Datos.SaveChanges();
+
+        return query;
     }
 }
