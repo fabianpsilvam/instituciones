@@ -22,6 +22,22 @@ public partial class CURSO
         }
     }
 
+    public List<CURSO> obtainAllCursos()
+    {
+        IQueryable<CURSO> curso = from i in Datos.CURSOes
+                                    select i;
+        return curso.ToList();
+    }
+
+    public List<CURSO> findCursosByNombreParalelo(String curso, int paraleloId)
+    {
+        IQueryable<CURSO> cursos = from i in Datos.CURSOes
+                                   where i.NOMBRE.Equals(curso) && i.PARALELOID == paraleloId
+                                   select i;
+        return cursos.ToList();
+    }
+
+
     public CURSO obtainCursoById(int cursoId)
     {
         return Datos.CURSOes.SingleOrDefault<CURSO>(a => a.CURSOID == cursoId);

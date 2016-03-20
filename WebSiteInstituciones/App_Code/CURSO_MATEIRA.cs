@@ -6,7 +6,7 @@ using System.Web;
 /// <summary>
 /// Descripción breve de CURSO_MATERIA
 /// </summary>
-public class CURSO_MATERIA
+public partial class CURSO_MATEIRA
 {
     private InstitucionEntities datos = null;
 
@@ -22,9 +22,34 @@ public class CURSO_MATERIA
         }
     }
 
+    public List<CURSO_MATEIRA> obtainCursosByMateria(int materiaId)
+    {
+        IQueryable<CURSO_MATEIRA> curso = from i in Datos.CURSO_MATEIRA
+                                  where i.MATERIAID == materiaId
+                                  select i;
+        return curso.ToList();
+    }
+
+
     public CURSO_MATEIRA obtainCursoMateriaById(int cursoMateriaId)
     {
         return Datos.CURSO_MATEIRA.SingleOrDefault<CURSO_MATEIRA>(a => a.CURSOMATERIAID == cursoMateriaId);
+    }
+
+    public List<CURSO_MATEIRA> obtainAllCursoMateriasByCurso(int cursoId)
+    {
+        IQueryable<CURSO_MATEIRA> cursoMaterias = from i in Datos.CURSO_MATEIRA
+                                        where i.CURSOID == cursoId
+                                        select i;
+        return cursoMaterias.ToList();
+    }
+
+    public List<CURSO_MATEIRA> obtainAllCursoMateriasByCursos(List<int> cursosId)
+    {
+        IQueryable<CURSO_MATEIRA> cursoMaterias = from i in Datos.CURSO_MATEIRA
+                                                  where cursosId.Contains(Convert.ToInt32(i.CURSOID))
+                                                  select i;
+        return cursoMaterias.ToList();
     }
 
     public CURSO_MATEIRA addCursoMateria(int cursoId, int materiaId)

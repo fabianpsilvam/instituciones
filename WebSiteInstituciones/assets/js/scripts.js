@@ -10,3 +10,12 @@
 }
 
 
+function selectRadioButton(radio) {
+    var rdBtn = document.getElementById(radio.id);
+    var rbList = document.getElementsByTagName("input");
+    for (i = 0; i < rbList.length; i++) {
+        if (rbList[i].type == "radio" && rbList[i].id != rdBtn.id) {
+            rbList[i].checked = false;
+        }
+    }
+}

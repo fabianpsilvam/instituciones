@@ -79,14 +79,13 @@ public partial class INSTITUCION
 
     public INSTITUCION refreshInstitution(int institutionId, String institutionName)
     {
-        INSTITUCION institution = null;
+        var query = (from c in Datos.INSTITUCIONs
+                     where c.INSTITUCIONID == institutionId
+                     select c).First();
 
-        INSTITUCION institutionRefresh = obtainInstitutionById(institutionId);
-        if (institutionRefresh != null)
-        {
-            deleteInstitution(institutionId);
-            institution = addInstitution(institutionName);
-        }
-        return institution;
+        query.NOMBRE = institutionName;
+        Datos.SaveChanges();
+
+        return query;
     }
 }

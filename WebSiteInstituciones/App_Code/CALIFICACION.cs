@@ -27,15 +27,32 @@ public partial class CALIFICACION
         return Datos.CALIFICACIONs.SingleOrDefault<CALIFICACION>(a => a.CALIFICACIONID == calificacionId);
     }
 
-    public CALIFICACION addCalificacion(String valor, String observacion, int materiaAlumnoId)
+    private int calcularPromedio(int parcial1, int parcial2, int parcial3)
+    {
+        if (parcial1 != null && parcial2 != null && parcial3 != null)
+        {
+            return (parcial1 + parcial2 + parcial3)/3;
+        }
+        if (parcial1 != null && parcial2 != null)
+        {
+            return (parcial1 + parcial2) / 2;
+        }
+
+        return parcial1;
+    }
+
+    public CALIFICACION addCalificacion(int parcial1, int parcial2, int parcial3, String observacion, int materiaAlumnoId)
     {
         CALIFICACION calificacion = new CALIFICACION();
 
         try
         {
             calificacion.CALIFICACIONID = 0;
-            calificacion.VALOR = valor;
+            calificacion.VALOR = calcularPromedio(parcial1, parcial2, parcial3);
             calificacion.OBSERVACION = observacion;
+            calificacion.PARCIAL1 = parcial1;
+            calificacion.PARCIAL2 = parcial2;
+            calificacion.PARCIAL3 = parcial3;
             calificacion.MATERIAALUMNOID = materiaAlumnoId;
 
             Datos.CALIFICACIONs.Add(calificacion);
@@ -61,16 +78,20 @@ public partial class CALIFICACION
         return result;
     }
 
-    public CALIFICACION refreshCalificacion(int calificacionId, String valor, String observacion, int materiaAlumnoId)
+    public CALIFICACION refreshCalificacion(int calificacionId, int parcial1, int parcial2, int parcial3, String observacion)
     {
-        CALIFICACION calificacion = null;
+        var query = (from c in Datos.CALIFICACIONs
+                     where c.CALIFICACIONID == calificacionId
+                     select c).First();
 
-        CALIFICACION calificacionRefresh = obtainCalificacionById(calificacionId);
-        if (calificacionRefresh != null)
-        {
-            deleteCalificacion(calificacionId);
-            calificacion = addCalificacion(valor, observacion, materiaAlumnoId);
-        }
-        return calificacion;
+        query.PARCIAL1 = parcial1;
+        query.PARCIAL2 = parcial1;
+        query.PARCIAL3 = parcial1;
+        query.VALOR = calcularPromedio(parcial1, parcial2, parcial3);
+        query.OBSERVACION = observacion;
+
+        Datos.SaveChanges();
+
+        return query;
     }
 }

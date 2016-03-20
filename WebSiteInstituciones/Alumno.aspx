@@ -20,16 +20,11 @@
                     <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
                 </asp:Panel>
 
-                <div id="wizard">
+                <div id="wizardV">
                     <h2>Alumno</h2>
                         <section>
                     
-                 <%--                <div class="row">
-              <div class="col-md-12">
-                  <h2 class="page-head-line">Profesores</h2>
-                  <h1 class="page-subhead-line">Agregar, modificar o eliminar las Profesores del Sistema. </h1>
-              </div>
-           </div>--%>
+                 <%--                                <input class="form-control" type="text">--%>
                 <!-- /. ROW  -->
            <div class="row">
                <%--                                <input class="form-control" type="text">--%>
@@ -64,7 +59,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Genero</label>
-                                        <asp:DropDownList ID="cbGenero" runat="server" class="form-control">
+                                        <asp:DropDownList ID="cbGeneroAlumno" runat="server" class="form-control">
                                             <asp:ListItem Value="M">Masculino</asp:ListItem>
                                             <asp:ListItem Value="F">Femenino</asp:ListItem>
                                         </asp:DropDownList>                                        
@@ -75,7 +70,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <div id='datetimepicker1'>
+                                        <div id='datetimepicker2'>
                                             <label>Fecha de Nacimiento</label>
                                             <asp:TextBox ID="txtFechaNacimientoAlumno" runat="server" class="form-control" type="date"></asp:TextBox>
                                         <p class="help-block">Fecha de Nacimiento</p>
@@ -120,7 +115,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Genero</label>
-                                        <asp:DropDownList ID="cdGenero" runat="server" class="form-control">
+                                        <asp:DropDownList ID="cbGeneroTutor" runat="server" class="form-control">
                                             <asp:ListItem Value="M">Masculino</asp:ListItem>
                                             <asp:ListItem Value="F">Femenino</asp:ListItem>
                                         </asp:DropDownList>
@@ -157,7 +152,6 @@
                                             <asp:ListItem Value="1">Normal</asp:ListItem>
                                             <asp:ListItem Value="2">Administrador</asp:ListItem>
                                         </asp:DropDownList>
-                                        <p class="help-block">Perfil de Usuario</p>
                                     </div>
                                 </div>
 
@@ -165,31 +159,62 @@
                         </div>
 
                 </section>
+
+
+                <h2>Curso</h2>
+                <section>
+                    
+                    <!-- Cursos -->
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Cursos Activos
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+
+                                <asp:GridView class="table table-striped table-bordered table-hover" ID="dgCursos" runat="server" AutoGenerateColumns="False" DataKeyNames="CURSOID">
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="Seleccionar">
+                                            <ItemTemplate>
+                                                <asp:RadioButton runat="server" ID="rbCursoId" OnClick="selectRadioButton(this)"/>
+                                            </ItemTemplate>
+                                            <ItemStyle Width="30px" />
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="CURSOID" HeaderText="Id"/>
+                                        <asp:BoundField DataField="NOMBRE" HeaderText="Curso"/>
+                                    </Columns>
+                                </asp:GridView>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
             </div>
-
-
-                
+                                
                <div class="col-md-12">
                     <asp:Button ID="btnGuardarAlumno" runat="server" Text="Guardar Alumno" class="btn btn-info" OnClick="btnGuardarAlumno_Click"/>
                     <asp:Button ID="btnEditarAlumno" runat="server" Text="Editar Alumno" class="btn btn-primary" OnClick="btnEditarAlumno_Click"/>
-                    <asp:Button ID="btnEliminarAlumno" runat="server" Text="Eliminar Alumno" class="btn btn-danger" OnClick="btnEliminarProfesor_Click"/>
+                    <asp:Button ID="btnEliminarAlumno" runat="server" Text="Eliminar Alumno" class="btn btn-danger" OnClick="btnEliminarAlumno_Click"/>
                     <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" class="btn btn-warning" OnClick="btnCancelar_Click"/>
-                    <asp:Label ID="lblProfesorId" runat="server" Text="0" Visible="False"></asp:Label>
+                    <asp:Label ID="lblAlumnoId" runat="server" Text="0" Visible="False"></asp:Label>
+                    <asp:Label ID="lblCursoId" runat="server" Text="0" Visible="False"></asp:Label>
                     <asp:Label ID="lblUsuarioId" runat="server" Text="0" Visible="False"></asp:Label>
+                    <asp:Label ID="lblTutorId" runat="server" Text="0" Visible="False"></asp:Label>
                 </div>
 
                <div class="col-md-12">
-                  <!--   Profesores -->
+                  <!--  Alumnos -->
                     <div class="panel panel-info">
                         <div class="panel-heading">
-                            Profesores Activos
+                            Alumnos Activos
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
 
                                 <asp:GridView class="table table-striped table-bordered table-hover" ID="gridAlumnos" runat="server" AutoGenerateColumns="False" AutoGenerateSelectButton="True" OnSelectedIndexChanged="gridAlumnos_SelectedIndexChanged">
                                     <Columns>
-                                        <asp:BoundField DataField="PROFESORID" HeaderText="Id" />
+                                        <asp:BoundField DataField="ALUMNOID" HeaderText="Id" />
                                         <asp:BoundField DataField="NOMBRE" HeaderText="Nombre" />
                                         <asp:BoundField DataField="APELLIDO" HeaderText="apellido"/>
                                         <asp:BoundField DataField="CEDULA" HeaderText="Descripcion"/>

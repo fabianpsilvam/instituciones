@@ -72,7 +72,11 @@ public partial class CALIFICACION
 {
     public int CALIFICACIONID { get; set; }
     public Nullable<int> MATERIAALUMNOID { get; set; }
-    public string VALOR { get; set; }
+    public Nullable<int> PARCIALID { get; set; }
+    public Nullable<int> PARCIAL1 { get; set; }
+    public Nullable<int> PARCIAL2 { get; set; }
+    public Nullable<int> PARCIAL3 { get; set; }
+    public Nullable<int> VALOR { get; set; }
     public string OBSERVACION { get; set; }
 
     public virtual MATERIA_ALUMNO MATERIA_ALUMNO { get; set; }

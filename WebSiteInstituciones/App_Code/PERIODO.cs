@@ -22,6 +22,13 @@ public partial class PERIODO
         }
     }
 
+    public List<PERIODO> obtainAllPeriodos()
+    {
+        IQueryable<PERIODO> periodo = from i in Datos.PERIODOes
+                                        select i;
+        return periodo.ToList();
+    }
+
     public PERIODO obtainPeriodoById(int periodoId)
     {
         return Datos.PERIODOes.SingleOrDefault<PERIODO>(a => a.PERIDODOID == periodoId);

@@ -22,6 +22,15 @@ public partial class TUTOR
         }
     }
 
+    public List<TUTOR> obtainAllTutoresByCedula(String cedula)
+    {
+        IQueryable<TUTOR> tutor = from i in Datos.TUTORs
+                                    where i.CEDULA.Equals(cedula)
+                                    select i;
+        return tutor.ToList();
+    }
+
+
     public TUTOR obtainTutorById(int tutorId)
     {
         return Datos.TUTORs.SingleOrDefault<TUTOR>(a => a.TUTORID == tutorId);

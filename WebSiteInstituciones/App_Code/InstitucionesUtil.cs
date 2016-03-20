@@ -55,10 +55,34 @@ public static class InstitucionesUtil
     }
 
 
-    public static DateTime transformaFecha(String fechaTexto)
+    public static String transformaFecha(String fechaTexto)
     {
-        var myDate = DateTime.ParseExact(fechaTexto, "yy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None);
-        return myDate;
-
+        if (!fechaTexto.Equals(""))
+        {
+            String[] dates = fechaTexto.Split('/');
+            return dates[2].Split(' ')[0] + "-" + dates[1] + "-" + dates[0]; ;
+        }
+        else
+        {
+            return "";
+        }
     }
+
+
+    public static CURSO guardarCurso(int cursoId, int alumnoId)
+    {
+        CURSO_MATEIRA cursoMateria = new CURSO_MATEIRA();
+        List<CURSO_MATEIRA> cursoMaterias = cursoMateria.obtainAllCursoMateriasByCurso(cursoId);
+        MATERIA_ALUMNO materiaAlumno = null;
+        if(cursoMaterias.Count > 0){
+            materiaAlumno = new MATERIA_ALUMNO();
+            for (int i = 0; i < cursoMaterias.Count; i++)
+            {
+                materiaAlumno.addMateriaAlumno(Convert.ToInt32(cursoMaterias[i].MATERIAID), alumnoId);
+            }
+        }
+
+        return null;
+    }
+
 }

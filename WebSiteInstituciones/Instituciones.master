@@ -120,17 +120,17 @@
                                     <a href="/Alumno.aspx"><i class="fa fa-coffee"></i>Alumnos</a>
                                 </li>
                                 <li>
-                                    <a href="pricing.html"><i class="fa fa-flash "></i>Materias</a>
+                                    <a href="/Materia.aspx"><i class="fa fa-flash "></i>Materias</a>
                                 </li>
                                  <li>
-                                    <a href="component.html"><i class="fa fa-key "></i>Cursos</a>
+                                    <a href="/Curso.aspx"><i class="fa fa-key "></i>Cursos</a>
                                 </li>
                                  <li>
-                                    <a href="social.html"><i class="fa fa-send "></i>Calificaciones</a>
+                                    <a href="/Calificaciones.aspx"><i class="fa fa-send "></i>Calificaciones</a>
                                 </li>
                             
                                  <li>
-                                    <a href="message-task.html"><i class="fa fa-recycle "></i>Periodos</a>
+                                    <a href="/Periodo.aspx"><i class="fa fa-recycle "></i>Periodos</a>
                                 </li>
                             
                            

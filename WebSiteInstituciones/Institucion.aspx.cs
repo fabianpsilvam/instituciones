@@ -9,16 +9,19 @@ public partial class Institution : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Object user = Session["user"];
-        if (user == null)
+        if (!Page.IsPostBack)
         {
-            Response.Redirect("Cuenta/Login.aspx");
-        }
-        else
-        {
-            USUARIO userLogin = (USUARIO)user;
-            lblInstitucionIdLogeado.Text = userLogin.INSTITUCIONID.ToString();
-            cargarInstituciones();
+            Object user = Session["user"];
+            if (user == null)
+            {
+                Response.Redirect("Cuenta/Login.aspx");
+            }
+            else
+            {
+                USUARIO userLogin = (USUARIO)user;
+                lblInstitucionIdLogeado.Text = userLogin.INSTITUCIONID.ToString();
+                cargarInstituciones();
+            }
         }
     }
 
@@ -63,13 +66,13 @@ public partial class Institution : System.Web.UI.Page
         btnCancelar.Visible = false;
     }
 
-    private String validarInstitucion()
+    private String validarInstitucion(Boolean isEdit)
     {
-        if (txtNombreInstitucion.Text.Equals(""))
+        if (txtNombreInstitucion.Text.Equals("") && !isEdit)
         {
             return "Complete el Nombre de la Institucion";
         }
-        if (lblInstitucionId.Text.Equals("") || lblInstitucionId.Text.Equals(lblInstitucionIdLogeado.Text))
+        if (lblInstitucionId.Text.Equals("0") || lblInstitucionId.Text.Equals("") || lblInstitucionId.Text.Equals(lblInstitucionIdLogeado.Text))
         {
             return "Ocurrio un error en el id de la Institucion";
         }
@@ -78,7 +81,7 @@ public partial class Institution : System.Web.UI.Page
 
     protected void btnGuardarInstitucion_Click(object sender, EventArgs e)
     {
-        String textoValidacion = validarInstitucion();
+        String textoValidacion = validarInstitucion(false);
         if (textoValidacion.Equals(""))
         {
             INSTITUCION institucion = new INSTITUCION();
@@ -104,7 +107,7 @@ public partial class Institution : System.Web.UI.Page
     }
     protected void btnEditarInstitucion_Click(object sender, EventArgs e)
     {
-        String textoValidacion = validarInstitucion();
+        String textoValidacion = validarInstitucion(true);
         if (textoValidacion.Equals(""))
         {
             INSTITUCION institucion = new INSTITUCION();
@@ -123,7 +126,7 @@ public partial class Institution : System.Web.UI.Page
     }
     protected void btnEliminarInstitucion_Click(object sender, EventArgs e)
     {
-        String textoValidacion = validarInstitucion();
+        String textoValidacion = validarInstitucion(true);
         if (textoValidacion.Equals(""))
         {
             INSTITUCION institucion = new INSTITUCION();

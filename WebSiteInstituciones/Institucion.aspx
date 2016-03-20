@@ -11,11 +11,8 @@
            </div>
                 <!-- /. ROW  -->
            <div class="row">
-            <%--<div class="col-md-6 col-sm-6 col-xs-12">--%>
-            <div class="col-md-6">
-
-                
-                <asp:Panel ID="pnlSucess" runat="server" class="chat-widget-left">
+            
+               <asp:Panel ID="pnlSucess" runat="server" class="chat-widget-left">
                     <asp:Label ID="lblSucess" runat="server" Text=""></asp:Label>
                 </asp:Panel>
 
@@ -23,6 +20,7 @@
                     <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
                 </asp:Panel>
 
+            <div class="col-md-6">
 
                <div class="panel panel-info">
                         <div class="panel-heading">
@@ -42,7 +40,7 @@
                                 <asp:Button ID="btnEliminarInstitucion" runat="server" Text="Eliminar Institución" class="btn btn-danger" OnClick="btnEliminarInstitucion_Click"/>  
                                 <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" class="btn btn-warning" OnClick="btnCancelar_Click"/>  
                                 <%--<button type="submit" class="btn btn-info">Guardar Institución </button>--%>
-                                <asp:Label ID="lblInstitucionId" runat="server" Text="0" Visible="False"></asp:Label>
+                                <asp:Label ID="lblInstitucionId" runat="server" Text="0" Visible="true"></asp:Label>
                                 <asp:Label ID="lblInstitucionIdLogeado" runat="server" Text="0" Visible="False"></asp:Label>
                             </div>
                         </div>

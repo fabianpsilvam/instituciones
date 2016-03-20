@@ -22,6 +22,13 @@ public partial class PARALELO
         }
     }
 
+    public List<PARALELO> obtainAllParalelos()
+    {
+        IQueryable<PARALELO> paralelo = from i in Datos.PARALELOes
+                                        select i;
+        return paralelo.ToList();
+    }
+
     public PARALELO obtainParaleloById(int paraleloId)
     {
         return Datos.PARALELOes.SingleOrDefault<PARALELO>(a => a.PARALELOID == paraleloId);

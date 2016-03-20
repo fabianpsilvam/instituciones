@@ -22,6 +22,35 @@ public partial class MATERIA
         }
     }
 
+    public List<MATERIA> obtainAllMaterias()
+    {
+        IQueryable<MATERIA> materia = from i in Datos.MATERIAs
+                                        select i;
+        return materia.ToList();
+    }
+
+
+    public List<MATERIA> obtainMateriaByCursoNombreAndParelo(String curso, int paraleloId)
+    {
+        var query = from m in Datos.MATERIAs
+                       join cm in Datos.CURSO_MATEIRA on m.MATERIAID equals cm.MATERIAID into idMateria
+                       from mcm in idMateria
+                       join c in Datos.CURSOes on mcm.CURSOID  equals c.CURSOID
+                       where c.NOMBRE.Equals(curso) && c.PARALELOID == paraleloId
+                       select m;
+        List<MATERIA> materias = new List<MATERIA>();
+        MATERIA mate = null;
+        foreach (var materia in query)
+        {
+            mate = new MATERIA();
+            mate.NOMBRE = materia.NOMBRE;
+            mate.MATERIAID = materia.MATERIAID;
+            materias.Add(mate);
+        }
+
+        return materias;
+    }
+
     public MATERIA obtainMateriaById(int materiaId)
     {
         return Datos.MATERIAs.SingleOrDefault<MATERIA>(a => a.MATERIAID == materiaId);

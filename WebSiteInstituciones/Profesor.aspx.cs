@@ -218,13 +218,7 @@ public partial class Administrar_Profesor : System.Web.UI.Page
         txtApellidoProfesor.Text = profesor.APELLIDO;
         txtcedulaProfesor.Text = profesor.CEDULA;
         dlGenero.SelectedValue = profesor.GENERO;
-        if (profesor.FECHANACIEMIENTO != null)
-        {
-            //"31/12/2016 0:00:00"
-            string date = profesor.FECHANACIEMIENTO.ToString();
-            String[] dates = date.Split('/');
-            txtFechaNacimiento.Text = dates[2].Split(' ')[0] + "-" + dates[1] + "-" + dates[0];//DateTime.ParseExact(date, "yyyy-MM-dd hh:mm tt", System.Globalization.CultureInfo.InvariantCulture).ToString();
-        }
+        txtFechaNacimiento.Text = InstitucionesUtil.transformaFecha(profesor.FECHANACIEMIENTO.ToString());
         txtUsuario.Text = profesor.USUARIO.NOMBRE;
         txtClave.Text = profesor.USUARIO.CLAVE;
         cbPerfil.SelectedValue = profesor.USUARIO.PERFIL.ToString();
